@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيق الوسوم في HTML</title>
+    <!-- تضمين خط Roboto من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 15px;
+        }
+
+        .intro-section {
+            background-color: #ffffff;
+            padding: 30px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .intro-section h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+            color: #555;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* النموذج (form) الذي يظهر عند الضغط */
+        #modal {
+            display: none; /* إخفاء النموذج افتراضيًا */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* خلفية مظللة */
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            width: 50%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 30px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-height: 40px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 20px;
+            border-top: 2px solid #4CAF50;
+            margin-top: 30px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .designer-name {
+            color: #4CAF50;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 18px;
+        }
+
+        footer p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tag-button {
+            display: block;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .tag-button:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HTML Tags</h1>
+    </header>
+
+    <!-- مقدمة عن الموقع -->
+    <div class="intro-section">
+        <h2>مرحبًا بك في موقع تعلم الوسوم!</h2>
+        <p>في هذا الموقع، ستتعلم كيفية استخدام الوسوم المختلفة في HTML. الوسوم هي اللبنات الأساسية لبناء صفحات الويب، وتساعدك على تنسيق المحتوى بشكل فعال. سنغطي بعض الوسوم الأساسية مثل &lt;b&gt; و &lt;i&gt; و &lt;mark&gt; و&lt;del&gt; وغيرهم. بعد تعلم كل وسم، يمكنك اختبار تأثيره بشكل عملي من خلال النموذج الذي سنعرضه لك في هذا الموقع.</p>
+        <p>ابدأ الآن في استكشاف الوسوم وتعلم كيفية استخدامها في بناء الصفحات!</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>الوسم</th>
+                <th>الوصف</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr onclick="applyTag('mark')">
+                <td>&lt;mark&gt;</td>
+                <td>يستخدم لتحديد نص مميز (عادةً يتم تمييزه باللون الأصفر).</td>
+            </tr>
+            <tr onclick="applyTag('b')">
+                <td>&lt;b&gt;</td>
+                <td>يستخدم لتمييز النص باستخدام خط عريض.</td>
+            </tr>
+            <tr onclick="applyTag('i')">
+                <td>&lt;i&gt;</td>
+                <td>يستخدم لتمييز النص باستخدام خط مائل (إيطالي).</td>
+            </tr>
+            <tr onclick="applyTag('u')">
+                <td>&lt;u&gt;</td>
+                <td>يستخدم لتحديد نص تحت خط.</td>
+            </tr>
+            <tr onclick="applyTag('del')">
+                <td>&lt;del&gt;</td>
+                <td>يستخدم لوضع خط على النص (إشارة إلى أنه تم حذفه أو تعديله).</td>
+            </tr>
+            <tr onclick="applyTag('sup')">
+                <td>&lt;sup&gt;</td>
+                <td>يستخدم لكتابة نص في الموضع العلوي (مثل الرموز الرياضية).</td>
+            </tr>
+            <tr onclick="applyTag('sub')">
+                <td>&lt;sub&gt;</td>
+                <td>يستخدم لكتابة نص في الموضع السفلي (مثل الرموز الكيميائية).</td>
+            </tr>
+            <tr onclick="applyTag('small')">
+                <td>&lt;small&gt;</td>
+                <td>يستخدم لكتابة نص بحجم أصغر.</td>
+            </tr>
+            <tr onclick="applyTag('strong')">
+                <td>&lt;strong&gt;</td>
+                <td>يستخدم لتحديد نص بقوة (عادة ما يكون بالخط العريض). يعبر عن الأهمية.</td>
+            </tr>
+            <tr onclick="applyTag('code')">
+                <td>&lt;code&gt;</td>
+                <td>يستخدم لتمييز النص البرمجي أو الأكواد.</td>
+            </tr>
+            <tr onclick="applyTag('em')">
+                <td>&lt;em&gt;</td>
+                <td>يستخدم لإبراز النص بشكل مائل، ويعبر عن التركيز.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- النموذج المنبثق (Modal) -->
+    <div id="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>تطبيق الوسم في النص:</h2>
+            <div id="output"></div> <!-- هذا المربع سيعرض تأثير الوسم -->
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>تم التصميم بواسطة </p>
+        <br>
+        <p><span class="designer-name">Sereen Diabat</span></p>
+        <p><span class="designer-name">Gharam Samara</span></p>
+    </footer>
+    <script>
+        // دالة لتطبيق الوسم في النص وعرض تأثيره في الـ div
+        function applyTag(tag) {
+            // تحديد النص الافتراضي لاختباره
+            const testText = "هذا نص تجريبي لاختبار تأثير الوسم.";
+
+            // تطبيق الوسم على النص
+            let modifiedText = `<${tag}>${testText}</${tag}>`;
+
+            // عرض النص المعدل داخل الـ div
+            document.getElementById('output').innerHTML = modifiedText;
+
+            // إظهار النموذج
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        // دالة لإغلاق النموذج
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
